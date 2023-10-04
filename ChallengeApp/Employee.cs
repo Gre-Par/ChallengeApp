@@ -100,11 +100,11 @@
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
 
-            for (var grade = 0; grade < this.grades.Count; grade++)
+            for (var index = 0; index < grades.Count; index++)
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
+                statistics.Max = Math.Max(statistics.Max, index);
+                statistics.Min = Math.Min(statistics.Min, index);
+                statistics.Average += this.grades[index];
             }
 
             statistics.Average = statistics.Average / this.grades.Count;
