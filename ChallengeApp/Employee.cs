@@ -1,4 +1,6 @@
-﻿namespace ChallengeApp
+﻿using static System.Formats.Asn1.AsnWriter;
+
+namespace ChallengeApp
 {
     public class Employee
     {
@@ -41,51 +43,47 @@
 
         public void AddGrade(int grade)
         {
-            float valueInInt = (float)grade;
-            this.AddGrade(valueInInt);
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
         }
-
+        public void AddGrade(double grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+        public void AddGrade(long grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
         public void AddGrade(char grade)
         {
             switch(grade)
             {
                 case 'A':
                 case 'a':
-                    this.grades.Add(100);
+                    AddGrade(100);
                     break;
                 case 'B':
                 case 'b':
-                    this.grades.Add(80);
+                    AddGrade(80);
                     break;
                 case 'C':
                 case 'c':
-                    this.grades.Add(60);
+                    AddGrade(60);
                     break;
                 case 'D':
                 case 'd':
-                    this.grades.Add(40);
+                    AddGrade(40);
                     break;
                 case 'E':
                 case 'e':
-                    this.grades.Add(20);
+                    AddGrade(20);
                     break;
                 default:
                     throw new Exception("Wrong letter");
             }
         }
-
-        public void AddGrade(double grade)
-        {
-            float valueInDouble = (float)grade;
-            this.AddGrade(valueInDouble);
-        }
-
-        public void AddGrade(long grade)
-        {
-            float valueInLong = (float)grade;
-            this.AddGrade(valueInLong);
-        }
-
         public Statistics GetStatistics() 
         {
             var statistics = new Statistics();
@@ -95,7 +93,7 @@
 
             foreach (var grade in this.grades) 
             {
-                if (grade >= 0)
+                if (grade >= 0)  //czy ten if jest potrzebny?
                 {
                     statistics.Max = Math.Max(statistics.Max, grade);
                     statistics.Min = Math.Min(statistics.Min, grade);
