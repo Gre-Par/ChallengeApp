@@ -1,23 +1,14 @@
-﻿using static System.Formats.Asn1.AsnWriter;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
         private List<float> grades = new List<float>();
-        public Employee()
-        {
-        }
-        public Employee(string name, string surname)
-        {
-            this.Name = name;
-            this.Surname = surname;
-        }
 
-        public string Name { get; private set; }
-
-        public string Surname { get; private set; }
-    
+        public Employee(string name, string surname, char sex)
+            : base(name, surname, sex)
+        {
+        
+        }
         public void AddGrade(float grade) 
         {
             if (grade >=0 && grade <= 100)
