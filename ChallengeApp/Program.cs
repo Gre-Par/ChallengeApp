@@ -4,11 +4,13 @@ Console.WriteLine("Witamy w programie do oceny pracowników, ocena kierownika");
 Console.WriteLine("=============================================");
 Console.WriteLine();
 
-var supervisor = new Supervisor() ;
+var employee = new EmployeeInFile("Greta", "Pardyka") ;
+//employee.AddGrade(0.5f);
+//employee.AddGrade(20);
 
 while (true)
 {
-    Console.WriteLine("Podaj kolejną ocenę kierownika: ");
+    Console.WriteLine("Podaj kolejną ocenę pracownika: ");
     var input = Console.ReadLine();
     if (input == "q")
     {
@@ -17,14 +19,14 @@ while (true)
 
     try
     {
-        supervisor.AddGrade(input);
+        employee.AddGrade(input);
     }
-    catch(Exception e)
+    catch (Exception e)
     {
         Console.WriteLine($"Exception catched: {e.Message}");
     }
 }
-var statistics = supervisor.GetStatistics();
+var statistics = employee.GetStatistics();
 Console.WriteLine($"Average: {statistics.Average}");
 Console.WriteLine($"Max: {statistics.Max}");
 Console.WriteLine($"Min: {statistics.Min}");
