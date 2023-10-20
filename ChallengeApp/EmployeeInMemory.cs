@@ -2,19 +2,29 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
+
         private List<float> grades = new List<float>();
-        public EmployeeInMemory(string name, string Surname) 
+        public EmployeeInMemory(string name, string Surname)
             : base(name, Surname)
         {
         }
-        //public EmployeeInMemory(string name, string surname)
-        //{
-        //    this.Surname = surname;
-        //    this.Name = name;
-        //}
-        //public string Surname { get; private set; }
-        //public string Name { get; private set; }
+        public override void AddGrade(float grade)
+        {
+            if (grade >= 0 && grade <= 100)
+            {
+                this.grades.Add(grade);
 
+                if(GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }                                               //informacja że ocena została dodana 
+            }
+            else
+            {
+                throw new Exception("invalid grade value");
+            }
+        }
         public override void AddGrade(double grade)
         {
             float gradeAsFloat = (float)grade;
@@ -68,17 +78,7 @@
             }
         }
 
-        public override void AddGrade(float grade)
-        {
-            if (grade >= 0 && grade <= 100)
-            {
-                this.grades.Add(grade);
-            }
-            else
-            {
-                throw new Exception("invalid grade value");
-            }
-        }
+        
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
